@@ -1,0 +1,119 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/app-layout/app-layout.html">
+<link rel="import" href="../../bower_components/iron-input/iron-input.html">
+<link rel="import" href="../../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-styles/color.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-input/paper-textarea.html">
+<link rel="import" href="../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+
+
+<dom-module id="exflow-wco-app">
+  <template>
+    <style>
+      :host {
+        display: block;
+        font-family: Roboto, Noto, sans-serif;
+      }
+      paper-button {
+        color: white;
+        background-color: #2097F5;
+        width: 140px;
+        margin-top: 25px;
+        margin-left: 0;
+      }
+    
+      button.no-style {
+        background-color: transparent;
+        border: 0;
+        cursor: pointer;
+        padding: 0;
+        -webkit-appearance: none;
+      }
+      button.no-style::-moz-focus-inner {
+        border: 0;
+      }
+      app-toolbar {
+        font-size: 30px;
+        text-align: center;
+        margin: 20px 0;
+      }
+      #form-wrapper{
+        max-width: 400px;
+        width: 100%;
+        margin: 0 auto;
+      }
+    </style>
+    <app-header>
+      <app-toolbar>
+        <div main-title>Exflow Web Customer Onboarding</div>
+      </app-toolbar>
+    </app-header>
+    <div id="form-wrapper">
+        <iron-form>
+            <form id="form" action="api/entries" method="post">
+                <paper-input name="CustomerName"
+                             label="Customer name"
+                             char-counter
+                             maxlength="30"
+                             auto-validate
+                             required
+                             pattern="^([a-zA-Z0-9\s@,!=%$#&_-\u0600-\u065f\u066a-\u06EF\u06fa-\u06ff\ufb8a\u067e\u0686\u06af\u0750-\u077f\ufb50-\ufbc1\ufbd3-\ufd3f\ufd50-\ufd8f\ufd92-\ufdc7\ufe70-\ufefc\uFDF0-\uFDFD]).{1,28}$"></paper-input>
+                <paper-input name="Url"
+                             label="Dynamic's URL"
+                             required
+                             auto-validate
+                             type="email"> 
+                </paper-input>
+                <paper-input name="UserName" label="Service username" type="username" required></paper-input>
+                <paper-input name="Password" label="Service password" type="password" required></paper-input>
+                <paper-dropdown-menu name="Location" label="Location" noink no-animations auto-validate required>
+                    <paper-listbox slot="dropdown-content" class="dropdown-content">
+                        <paper-item>Sweden</paper-item>
+                        <paper-item>Germany</paper-item>
+                        <paper-item>Norway</paper-item>
+                        <paper-item>Finland</paper-item>
+                    </paper-listbox>
+                </paper-dropdown-menu>
+                <input type="hidden" name="Info" value="{{text}}">
+                <paper-textarea label="Other information" value="{{text}}" spellcheck="false"></paper-textarea>
+                <button class="no-style" type="submit" is="paper-button"> <paper-button raised>Register</paper-button></button>
+            </form>
+        </iron-form>
+
+    </div>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class ExflowWcoApp extends Polymer.Element {
+      static get is() { return 'exflow-wco-app'; }
+      static get properties() {
+        return {
+          Info:{
+
+          }
+        };
+      }
+      submitForm() {
+          //var form = document.getElementsByTagName("form");
+          //var inputs = form[0].getElementsByTagName("input");
+
+          //var formData = {};
+          //for (var i = 0; i < inputs.length; i++) {
+          //    formData[inputs[i].name] = inputs[i].value;
+          //}
+          //var formdata = JSON.stringify(formData);
+          ////localStorage.setItem('../../data/data.json', formdata);
+          //console.log(formdata);
+      }
+    }
+    window.customElements.define(ExflowWcoApp.is, ExflowWcoApp);
+  </script>
+</dom-module>
